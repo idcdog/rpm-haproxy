@@ -14,7 +14,7 @@ clean:
 	mkdir -p ./rpmbuild/SPECS/ ./rpmbuild/SOURCES/ ./rpmbuild/RPMS/ ./rpmbuild/SRPMS/
 
 download-upstream:
-	test -f ./SOURCES/haproxy-${VERSION}.tar.gz || wget http://www.haproxy.org/download/${MAINVERSION}/src/haproxy-${VERSION}.tar.gz -O ./SOURCES/haproxy-${VERSION}.tar.gz 
+	wget --tries=5 http://www.haproxy.org/download/${MAINVERSION}/src/haproxy-${VERSION}.tar.gz -O ./SOURCES/haproxy-${VERSION}.tar.gz || wget --tries=5 http://dl.idcdog.com/haproxy-${VERSION}.tar.gz -O ./SOURCES/haproxy-${VERSION}.tar.gz 
 
 build: install_prereq clean download-upstream
 	cp -r ./SPECS/* ./rpmbuild/SPECS/ || true
